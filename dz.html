@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursive Functions Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #output {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .task {
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .task.important-1 {
+            background-color: #ffdddd;
+        }
+
+        .task.important-2 {
+            background-color: #ffedcc;
+        }
+
+        .task.important-3 {
+            background-color: #dfffd6;
+        }
+    </style>
+</head>
+<body>
+<h1>Recursive Functions Demo</h1>
+<div id="output"></div>
+<button onclick="writeToOutput(power(2, 10))">Power</button>
+<button onclick="writeToOutput(gcd(48, 18))">GCD</button>
+<button onclick="writeToOutput(maxDigit(379))">Max Digit</button>
+<button onclick="writeToOutput(isPrime(29))">Is Prime</button>
+<button onclick="writeToOutput(factorize(18))">Factorize</button>
+<button onclick="writeToOutput(fibonacci(6))">Fibonacci</button>
+
+<script>
+    function power(base, exponent) {
+        if (exponent === 0) {
+            return 1;
+        } else {
+            return base * power(base, exponent - 1);
+        }
+    }
+
+    function gcd(a, b) {
+        if (b === 0) {
+            return a;
+        } else {
+            return gcd(b, a % b);
+        }
+    }
+
+    function maxDigit(n) {
+        if (n < 10) {
+            return n;
+        } else {
+            return Math.max(n % 10, maxDigit(Math.floor(n / 10)));
+        }
+    }
+
+    function isPrime(n, i = 2) {
+        if (n <= 2) {
+            return n === 2 ? true : false;
+        }
+        if (n % i === 0) {
+            return false;
+        }
+        if (i * i > n) {
+            return true;
+        }
+        return isPrime(n, i + 1);
+    }
+
+    function factorize(n, i = 2) {
+        if (n <= 1) {
+            return "";
+        }
+        if (n % i === 0) {
+            return i + " " + factorize(n / i, i);
+        } else {
+            return factorize(n, i + 1);
+        }
+    }
+
+    function fibonacci(n) {
+        if (n <= 1) {
+            return n;
+        } else {
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+    }
+
+    function writeToOutput(message) {
+        document.getElementById("output").innerText = message;
+    }
+</script>
+</body>
+</html>
